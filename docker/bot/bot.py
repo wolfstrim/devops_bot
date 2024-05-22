@@ -92,7 +92,7 @@ def start(update: Update, context):
     update.message.reply_text("Привет! Я бот, который может помочь вам с поиском информации и мониторингом Linux системы.\n"
                               "Чтобы узнать доступные команды, наберите /help.")
 
-def help(update, context):
+def help(update: Update, context):
     update.message.reply_text("Список доступных команд:\n"
                               "/find_email - Найти email-адреса в тексте\n"
                               "/find_phone_number - Найти номера телефонов в тексте\n"
@@ -227,7 +227,7 @@ def verify_password(update: Update, context):
         re.compile(r'[A-Z]'),
         re.compile(r'[a-z]'),
         re.compile(r'\d'),
-        re.compile(r'[^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$]')
+        re.compile(r'[\!\@\#\$\%\^\&\*\(\)\.]')
     ]
     for i in regExps:
         if not i.search(user_input):
@@ -456,7 +456,7 @@ def main():
 
 
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("help", helpCommand))
+    dp.add_handler(CommandHandler("help", help))
     
     #Monitoring
     dp.add_handler(CommandHandler("get_release", get_release))
